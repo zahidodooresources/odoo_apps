@@ -10,7 +10,18 @@
     'author': 'Zalino Tech (Private) Limited',
     'company': 'Zalino Tech',
     'maintainer': 'Zalino Tech',
-    "description": "Integrate Odoo invoices with FBR Digital Invoicing APIs to get real-time taxes/validation.",
+        "description": """FBR Integration App by Zalino Tech seamlessly connects Odoo ERP with Pakistan’s Federal Board of Revenue (FBR) digital invoicing system.
+        It ensures that all sales invoices are validated, synced, and compliant with FBR’s prescribed formats, HS Codes, and reporting requirements.
+Key Features
+------------
+
+- ✅ Automatic synchronization of Odoo invoices with FBR
+- ✅ Real-time response handling from FBR APIs
+- ✅ Error and status reporting inside Odoo
+- ✅ Secure authentication with FBR APIs
+- ✅ Audit logs of all invoices synced with FBR
+
+    """,
 
     "depends": ['account'],
     "data": [
