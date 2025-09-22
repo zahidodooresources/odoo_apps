@@ -20,7 +20,7 @@
         "views/product_template.xml",
     ],
     'images': ['static/description/banner.png'],
-
+    'license': 'LGPL-3',
     "installable": True,
     "application": False,
     "auto_install": False,
