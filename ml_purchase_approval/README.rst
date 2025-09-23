@@ -3,13 +3,13 @@
    :alt: License: LGPL-3
 .. image:: https://img.shields.io/badge/version-1.0-green.svg
    :alt: Version
-.. image:: https://img.shields.io/badge/Odoo%20Version-18.0-brightgreen.svg
-   :alt: Odoo 18 Compatible
+.. image:: https://img.shields.io/badge/Odoo%20Version-19.0-brightgreen.svg
+   :alt: Odoo 19 Compatible
 
 Multi-Level Purchase Approval
 =============================
 
-A comprehensive approval workflow management system for Odoo v18 that enables configurable multi-level purchase order approvals with amount-based thresholds and hierarchical approval chains.
+A comprehensive approval workflow management system for Odoo v19 that enables configurable multi-level purchase order approvals with amount-based thresholds and hierarchical approval chains.
 
 Overview
 --------
@@ -110,9 +110,9 @@ For complete license details, visit: https://www.gnu.org/licenses/lgpl-3.0.en.ht
 Credits
 -------
 
-- **Core Development**: Zalino Tech Development Team
-- **Quality Assurance**: Zalino Tech Testing Team
-- **Documentation**: Zalino Tech Technical Writers
+- **Lead Developer (v19):** Zahid Anwar
+- **Lead Developer (v18):** Zahid Anwar
+- **Contact:** info@zalinotech.com
 
 Bug Reporting
 -------------
@@ -141,8 +141,8 @@ Maintainer
 Changelog
 ---------
 
-**Version 1.0** (2025-09-05)
-- Initial release for Odoo v18
+**Version 1.0** (2025-09-23)
+- Initial release for Odoo v19
 - Multi-level approval workflow implementation
 - Amount-based threshold configuration
 - Approval history and audit trail

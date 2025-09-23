@@ -2,7 +2,7 @@
    :target: https://www.gnu.org/licenses/lgpl-3.0.en.html
    :alt: License: LGPL-3
 
-Rest API App for Odoo v18
+Rest API App for Odoo v19
 =========================
 
 This module enables seamless communication with the Odoo database via RESTful API requests. It is designed for developers and integrators who need secure, configurable, and dynamic access to Odoo models and records.
@@ -44,6 +44,7 @@ For full license details, see: https://www.gnu.org/licenses/lgpl-3.0.en.html
 Credits
 -------
 
+- **Lead Developer (v19):** Zahid Anwar
 - **Lead Developer (v18):** Zahid Anwar
 - **Lead Developer (v17):** Zahid Anwar
 - **Contact:** info@zalinotech.com

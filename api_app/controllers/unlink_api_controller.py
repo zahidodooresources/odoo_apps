@@ -28,7 +28,7 @@ class UnlinkApiController(http.Controller):
                 'data_received': "['model_alias', 'id'] are required Fields!"
             }
 
-        api_search = request.env['api.app.write'].sudo().search([('model_alias','=',model_alias)], limit=1)
+        api_search = request.env['api.app.unlink'].sudo().search([('model_alias','=',model_alias)], limit=1)
 
         if not api_search:
             return {

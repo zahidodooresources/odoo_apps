@@ -34,7 +34,8 @@ class AccountMove(models.Model):
                 raise UserError(f"FBR returned an error: {response}")
 
             move.fbr_synced = True
-            move.message_post(body=f"✅ Invoice synced with FBR.<br/>Response:<br/><pre>{json.dumps(response, indent=2)}</pre>")
+            move.message_post(
+                body=f"✅ Invoice synced with FBR.<br/>Response:<br/><pre>{json.dumps(response, indent=2)}</pre>")
 
     # -------------------------------------------------------------------------
     # Payload Preparation
@@ -47,27 +48,29 @@ class AccountMove(models.Model):
 
         items = []
         for line in self.invoice_line_ids:
+            rate = line.tax_ids[0].amount if line.tax_ids else 0
+            line_tax_total = (line.price_subtotal * rate) / 100
 
             items.append({
-            "hsCode": line.product_id.hs_code or "6002.9000",
-            "productDescription": line.product_id.name or "Unknown",
-            "rate": f"{line.tax_ids[0].amount}%" if line.tax_ids else "0%",
-            "uoM": line.product_id.hs_unit_measure or "KG",
-            "quantity": line.quantity or 1,
-            "totalValues": line.price_total or 0,
-            "valueSalesExcludingST": line.price_subtotal or 0,
-            "fixedNotifiedValueOrRetailPrice": 0,
-            "salesTaxApplicable": line.l10n_gcc_invoice_tax_amount or 0,
-            "salesTaxWithheldAtSource": 0,
-            "extraTax": "",
-            "furtherTax": 0,
-            "sroScheduleNo": "",
-            "fedPayable": 0,
-            "discount": line.discount or 0,
-            "saleType": "Processing/Conversion of Goods",
-            "sroItemSerialNo": ""
-            })
+                "hsCode": line.product_id.hs_code or "6002.9000",
+                "productDescription": line.product_id.name or "Unknown",
 
+                "uoM": line.product_id.hs_unit_measure or "KG",
+                "quantity": line.quantity or 1,
+                "totalValues": line.price_total or 0,
+                "valueSalesExcludingST": line.price_subtotal or 0,
+                "fixedNotifiedValueOrRetailPrice": 0,
+                "rate": f"{rate}%",
+                "salesTaxApplicable": line_tax_total or 0,
+                "salesTaxWithheldAtSource": 0,
+                "extraTax": "",
+                "furtherTax": 0,
+                "sroScheduleNo": "",
+                "fedPayable": 0,
+                "discount": line.discount or 0,
+                "saleType": "Processing/Conversion of Goods",
+                "sroItemSerialNo": ""
+            })
 
         payload = {
             "invoiceType": "Sale Invoice",
@@ -77,7 +80,7 @@ class AccountMove(models.Model):
             "sellerProvince": self.company_id.state_id.name if self.company_id.state_id else "Punjab",
             "sellerAddress": self.company_id.street or "Address",
 
-             "buyerNTNCNIC": buyer.vat or "",
+            "buyerNTNCNIC": buyer.vat or "",
             "buyerBusinessName": buyer.name or 'Anonymous',
             "buyerProvince": buyer.state_id.name if buyer.state_id else "Punjab",
             "buyerAddress": buyer.street or "Address",
@@ -87,7 +90,6 @@ class AccountMove(models.Model):
             "scenarioId": "SN016",
             "items": items
         }
-
 
         return payload
 
