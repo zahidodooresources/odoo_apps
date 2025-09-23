@@ -47,25 +47,28 @@ class AccountMove(models.Model):
 
         items = []
         for line in self.invoice_line_ids:
+            rate = line.tax_ids[0].amount if line.tax_ids else 0
+            line_tax_total = (line.price_subtotal * rate) / 100
 
             items.append({
-            "hsCode": line.product_id.hs_code or "6002.9000",
-            "productDescription": line.product_id.name or "Unknown",
-            "rate": f"{line.tax_ids[0].amount}%" if line.tax_ids else "0%",
-            "uoM": line.product_id.hs_unit_measure or "KG",
-            "quantity": line.quantity or 1,
-            "totalValues": line.price_total or 0,
-            "valueSalesExcludingST": line.price_subtotal or 0,
-            "fixedNotifiedValueOrRetailPrice": 0,
-            "salesTaxApplicable": line.l10n_gcc_invoice_tax_amount or 0,
-            "salesTaxWithheldAtSource": 0,
-            "extraTax": "",
-            "furtherTax": 0,
-            "sroScheduleNo": "",
-            "fedPayable": 0,
-            "discount": line.discount or 0,
-            "saleType": "Processing/Conversion of Goods",
-            "sroItemSerialNo": ""
+                "hsCode": line.product_id.hs_code or "6002.9000",
+                "productDescription": line.product_id.name or "Unknown",
+
+                "uoM": line.product_id.hs_unit_measure or "KG",
+                "quantity": line.quantity or 1,
+                "totalValues": line.price_total or 0,
+                "valueSalesExcludingST": line.price_subtotal or 0,
+                "fixedNotifiedValueOrRetailPrice": 0,
+                "rate": f"{rate}%",
+                "salesTaxApplicable": line_tax_total or 0,
+                "salesTaxWithheldAtSource": 0,
+                "extraTax": "",
+                "furtherTax": 0,
+                "sroScheduleNo": "",
+                "fedPayable": 0,
+                "discount": line.discount or 0,
+                "saleType": "Processing/Conversion of Goods",
+                "sroItemSerialNo": ""
             })
 
 
